@@ -1,0 +1,26 @@
+---
+title: "Welcome"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: yeti
+    
+---
+
+# Hi, I'm **Kaicheng Mo** 👋
+
+I'm an MPH candidate in Epidemiology at Columbia Mailman with a BSc in Biochemistry (UCL). 
+I work across real‑world data analysis (R, SAS, Python, SQL), evidence synthesis, and market / competitive analytics in healthcare—translating complex findings into clear recommendations for pharma/biotech, med‑tech, and healthcare services.
+
+I'm currently open to roles in **HEOR/RWE**, **epidemiology / data science**, **HLS consulting**, and **market access / analytics**.
+
+- 📬 Email: <km4071@cumc.columbia.edu>  
+- 💻 GitHub: <https://github.com/Lucus-Mo>
+
+<div style="margin-top: 1rem;">
+<a class="btn btn-primary" href="resume.html" role="button">View my resume</a>
+<a class="btn btn-default" href="assets/Kaicheng_Mo_RESUME_Industry.pdf" role="button">Download PDF</a>
+</div>
+
+_Last updated: October 25, 2025_

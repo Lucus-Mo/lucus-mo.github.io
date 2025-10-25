@@ -1,0 +1,21 @@
+name: "Kaicheng Mo"
+output_dir: "."
+navbar:
+  title: "Kaicheng Mo"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Resume"
+      href: resume.html
+  right:
+    - icon: fa-github
+      href: https://github.com/Lucus-Mo
+    - icon: fa-envelope
+      href: mailto:km4071@cumc.columbia.edu
+    - text: "LinkedIn"
+      href: https://www.linkedin.com/in/YOUR-USERNAME/   # update me
+output:
+  html_document:
+    theme: cosmo     # Bootswatch theme
+    highlight: textmate
+    toc: false

@@ -1,0 +1,62 @@
+---
+title: "Resume"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+# Kaicheng Mo
+
+**Location:** New York, NY  
+**Phone:** (210) 321-2709  
+**Email:** km4071@cumc.columbia.edu  
+**GitHub:** <https://github.com/Lucus-Mo>
+
+---
+
+## Professional Summary
+
+Analytical MPH candidate in Epidemiology (Columbia Mailman) with Biochemistry training (UCL) and an applied biostatistics / data‑science certificate. Hands‑on experience in real‑world data analysis (R, SAS, Python, SQL), evidence synthesis, and market / competitive analytics for healthcare. Adept at translating complex findings into clear business recommendations for cross‑functional stakeholders in pharma/biotech, med‑tech, and healthcare services. Open to HLS consulting, HEOR/RWE analyst, epidemiology/data scientist, and market access/analytics roles.
+
+## Education
+
+**Columbia University Mailman School of Public Health — New York, NY**  
+MPH, Epidemiology (GPA 4.0) · Sep 2024 – Jun 2026  
+*Coursework*: Applied Regression; Quantitative Methods; Health Economics  
+*Certification*: Applied Biostatistics & Data Science (2025)
+
+**University College London (UCL) — London, UK**  
+BSc, Biochemistry (Upper Second‑Class Honors, 2.1) · Sep 2021 – Jun 2024  
+*Research*: Assessed Gaussian & worm‑like chain models for IDPs; explored computational approaches to improve conformational predictions
+
+## Selected Projects (2025)
+
+**Systematic Review — Parenteral Nutrition (PN) & Appetite/Satiety/Oral Intake** (New York, NY; Jun–Present 2025)  
+- Defined PICOTS & inclusion aligned to Institute of Medicine (IOM) standards (adults; PN ≥48h); outcomes included appetite/satiety/oral intake, LOS, infection  
+- Built multi‑block PubMed strategies (ICU/HSCT/surgery/benign & malignant GI); produced evidence tables & PROSPERO fields  
+- Automated logs/tables in R/SAS
+
+**Longitudinal Cognitive Analysis in R — with Dr. Sarah Tom** (New York, NY; Jun–Present 2025)  
+- Cleaned repeated‑measures cognition data; encoded factors; centered age  
+- Fit linear mixed‑effects models (`lme4`) for cognition trajectories vs. time; generated CIs, diagnostics, and interpretable outputs for decision‑making
+
+## Experience
+
+**Manager Assistant Intern — Guangzhou Dekang Medical Technology Co.** (Guangzhou, China; Jun–Aug 2024)  
+- Estimated market share & growth from sales data; identified priority segments for metformin  
+- Conducted market research; contributed to positioning & prospect planning; prepared management‑ready deliverables
+
+**Research Assistant — The Chinese University of Hong Kong (CUHK)** (Hong Kong; Jun–Sep 2023)  
+- Supported discovery of KEAP1‑targeting bioactives in Xuebijing injection  
+- Ran transcriptomics & network analyses; used CETSA to validate compound–target interactions
+
+## Skills
+
+**Technical:** R (tidyverse, lme4, broom.mixed), Python (pandas, numpy), SQL, SAS, Excel, PowerPoint  
+**Methods:** Evidence synthesis (IOM; PICOTS), longitudinal modeling, data cleaning / QA  
+**Languages:** English (Fluent); Mandarin (Native)
+
+---
+
+[Download PDF resume](assets/Kaicheng_Mo_RESUME_Industry.pdf)
