@@ -7,15 +7,17 @@ navbar:
       href: index.html
     - text: "Resume"
       href: resume.html
+    - text: "Dashboard"
+      href: noaa_dashboard.html   
   right:
     - icon: fa-github
       href: https://github.com/Lucus-Mo
     - icon: fa-envelope
       href: mailto:km4071@cumc.columbia.edu
     - text: "LinkedIn"
-      href: https://www.linkedin.com/in/YOUR-USERNAME/   # update me
+      href: www.linkedin.com/in/kaicheng-mo-4bb627228
 output:
   html_document:
-    theme: cosmo     # Bootswatch theme
-    highlight: textmate
-    toc: false
+    theme: yeti
+    toc: true
+    toc_float: true
