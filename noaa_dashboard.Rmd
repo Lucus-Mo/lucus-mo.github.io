@@ -1,0 +1,137 @@
+---
+title: "NOAA Flexdashboard — New York (1981–2010)"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    theme: yeti
+    source_code: embed
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(lubridate)
+library(plotly)
+```
+
+
+
+```{r}
+csv_path  <- "nynoaadat.csv"
+
+rdata_path <- "nynoaadat.RData"
+
+if (file.exists(csv_path)) {
+  df_raw <- readr::read_csv(csv_path, show_col_types = FALSE)
+} else if (file.exists(rdata_path)) {
+  load(rdata_path)  # expects object 'nydat'
+  if (!exists("nydat")) stop("RData found, but object 'nydat' missing.")
+  df_raw <- nydat
+} else {
+  stop("Place 'nynoaadat.csv' or 'nynoaadat.RData' in the project root.")
+}
+```
+
+```{r}
+df <- df_raw |>
+  mutate(
+    date      = as.Date(date),
+    year      = year(date),
+    month     = month(date),
+    month_lab = factor(month(date, label = TRUE, abbr = TRUE)),
+    tmax_c    = tmax / 10,
+    tmin_c    = tmin / 10,
+    prcp_mm   = prcp / 10,
+    snow_mm   = snow,
+    snwd_mm   = snwd
+  ) |>
+  filter(date >= as.Date("1981-01-01"), date <= as.Date("2010-12-31"))
+```
+
+```{r}
+set.seed(123)
+scatter_n <- 50000L
+
+df_scatter <- df |>
+  dplyr::filter(!is.na(tmax_c), !is.na(tmin_c))
+
+n_take <- min(scatter_n, nrow(df_scatter))
+
+scatter_df <- df_scatter |>
+  dplyr::slice_sample(n = n_take)
+
+monthly_df <- df |>
+  dplyr::mutate(ym = lubridate::floor_date(date, "month")) |>
+  dplyr::group_by(ym) |>
+  dplyr::summarise(
+    tmax_mean = mean(tmax_c, na.rm = TRUE),
+    tmin_mean = mean(tmin_c, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+
+```{r}
+annual_prcp <- df |>
+  group_by(year) |>
+  summarise(total_prcp_mm = sum(prcp_mm, na.rm = TRUE), .groups = "drop")
+
+box_df <- df |>
+  filter(!is.na(tmax_c)) |>
+  select(month_lab, tmax_c)
+
+n_rows     <- nrow(df)
+n_stations <- n_distinct(df$id)
+```
+
+```{r}
+plot_ly(monthly_df, x = ~ym) |>
+  add_lines(y = ~tmax_mean, name = "Avg TMAX (°C)",
+            hovertemplate = "%{x|%b %Y}<br>%{y:.1f} °C") |>
+  add_lines(y = ~tmin_mean, name = "Avg TMIN (°C)",
+            hovertemplate = "%{x|%b %Y}<br>%{y:.1f} °C") |>
+  layout(
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Temperature (°C)"),
+    legend = list(orientation = "h")
+  )
+```
+
+```{r}
+plot_ly(annual_prcp, x = ~year, y = ~total_prcp_mm, type = "bar",
+        hovertemplate = "Year %{x}<br>Total %{y:.0f} mm") |>
+  layout(
+    xaxis = list(title = "Year"),
+    yaxis = list(title = "Total precipitation (mm)")
+  )
+```
+```{r}
+plot_ly(scatter_df,
+        x = ~tmin_c, y = ~tmax_c,
+        type = "scatter", mode = "markers",
+        color = ~month_lab, alpha = 0.5,
+        text = ~paste0(
+          "Station: ", id, "<br>",
+          "Date: ", date, "<br>",
+          "TMIN: ", round(tmin_c,1), " °C<br>",
+          "TMAX: ", round(tmax_c,1), " °C"
+        ),
+        hoverinfo = "text") |>
+  layout(
+    xaxis = list(title = "TMIN (°C)"),
+    yaxis = list(title = "TMAX (°C)"),
+    legend = list(title = list(text = "Month"))
+  )
+```
+
+```{r}
+plot_ly(box_df, x = ~month_lab, y = ~tmax_c, type = "box",
+        hovertemplate = "Month %{x}<br>TMAX %{y:.1f} °C") |>
+  layout(
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Daily TMAX (°C)")
+  )
+```
+
