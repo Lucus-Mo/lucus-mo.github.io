@@ -54,8 +54,8 @@ df <- df_raw |>
 ```{r}
 set.seed(123)
 
-scatter_target <- 10000L   
-box_target     <- 20000L   
+scatter_target <- 2000L   
+box_target     <- 2000L   
 
 df_scatter <- df |>
   dplyr::filter(!is.na(tmax_c), !is.na(tmin_c))
