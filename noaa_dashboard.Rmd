@@ -1,14 +1,12 @@
 ---
-title: "Problem 2 — NOAA Flexdashboard (1981–2010)"
+title: "NOAA Flexdashboard (1981–2010)"
 output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
     theme: yeti
-    self_contained: false
     lib_dir: "libs"
     source_code: embed
-    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +18,7 @@ library(plotly)
 
 
 
-```{r}
+```{r, include=FALSE}
 csv_path  <- "nynoaadat.csv"
 
 rdata_path <- "nynoaadat.RData"
@@ -28,7 +26,7 @@ rdata_path <- "nynoaadat.RData"
 if (file.exists(csv_path)) {
   df_raw <- readr::read_csv(csv_path, show_col_types = FALSE)
 } else if (file.exists(rdata_path)) {
-  load(rdata_path)  # expects object 'nydat'
+  load(rdata_path)  
   if (!exists("nydat")) stop("RData found, but object 'nydat' missing.")
   df_raw <- nydat
 } else {
@@ -36,7 +34,7 @@ if (file.exists(csv_path)) {
 }
 ```
 
-```{r}
+```{r, include=FALSE}
 df <- df_raw |>
   mutate(
     date      = as.Date(date),
@@ -52,11 +50,11 @@ df <- df_raw |>
   filter(date >= as.Date("1981-01-01"), date <= as.Date("2010-12-31"))
 ```
 
-```{r}
+```{r, include=FALSE}
 set.seed(123)
 
-scatter_target <- 1000L   
-box_target     <- 1000L   
+scatter_target <- 10000L   
+box_target     <- 5000L   
 
 df_scatter <- df |>
   dplyr::filter(!is.na(tmax_c), !is.na(tmin_c))
@@ -85,7 +83,7 @@ annual_prcp <- df |>
 ```
 
 
-```{r}
+```{r, include=FALSE}
 annual_prcp <- df |>
   group_by(year) |>
   summarise(total_prcp_mm = sum(prcp_mm, na.rm = TRUE), .groups = "drop")
@@ -98,7 +96,11 @@ n_rows     <- nrow(df)
 n_stations <- n_distinct(df$id)
 ```
 
-```{r}
+Fig 1 {data-width=60}
+-----------------------------------------------------------------------
+
+### A. Monthly Avg TMAX/TMIN
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 plot_ly(monthly_df, x = ~ym) |>
   add_lines(y = ~tmax_mean, name = "Avg TMAX (°C)",
             hovertemplate = "%{x|%b %Y}<br>%{y:.1f} °C") |>
@@ -111,7 +113,11 @@ plot_ly(monthly_df, x = ~ym) |>
   )
 ```
 
-```{r}
+Fig 2 {data-width=60}
+-----------------------------------------------------------------------
+
+### B. Annual Total Precipitation
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 plot_ly(annual_prcp, x = ~year, y = ~total_prcp_mm, type = "bar",
         hovertemplate = "Year %{x}<br>Total %{y:.0f} mm") |>
   layout(
@@ -120,6 +126,13 @@ plot_ly(annual_prcp, x = ~year, y = ~total_prcp_mm, type = "bar",
   )
 ```
 ```{r}
+```
+
+Fig 3 {data-width=60}
+-----------------------------------------------------------------------
+
+### C. TMAX vs TMIN
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 plot_ly(scatter_df,
         x = ~tmin_c, y = ~tmax_c,
         type = "scatter", mode = "markers",
@@ -138,12 +151,11 @@ plot_ly(scatter_df,
   )
 ```
 
-```{r}
-plot_ly(box_df, x = ~month_lab, y = ~tmax_c, type = "box",
-        hovertemplate = "Month %{x}<br>TMAX %{y:.1f} °C") |>
-  layout(
-    xaxis = list(title = "Month"),
-    yaxis = list(title = "Daily TMAX (°C)")
-  )
+Fig 4 {data-width=60}
+-----------------------------------------------------------------------
+
+### D. Monthly Distribution of Daily TMAX
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+plot_ly(box_df, x = ~month_lab, y = ~tmax_c, type = "box", hovertemplate = "Month %{x}<br>TMAX %{y:.1f} °C") |> layout( xaxis = list(title = "Month"), yaxis = list(title = "Daily TMAX (°C)") )
 ```
 

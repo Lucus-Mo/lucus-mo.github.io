@@ -22,7 +22,7 @@ I'm currently open to roles in **HEOR/RWE**, **epidemiology / data science**, **
   <a class="btn btn-primary" href="resume.html" role="button">View my resume</a>
   <a class="btn btn-default" href="assets/Kaicheng_Mo_RESUME_Industry.pdf" role="button"
      target="_blank" rel="noopener" download>Download PDF</a>
-  <a class="btn btn-success" href="noaa_dashboard.html" role="button">Open Latest HTML</a>
+  <a class="btn btn-success" href="noaa_dashboard.html" role="button">NY NOAA</a>
 </div>
 
 _Last updated: October 25, 2025_

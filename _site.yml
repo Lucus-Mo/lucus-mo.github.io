@@ -7,7 +7,7 @@ navbar:
       href: index.html
     - text: "Resume"
       href: resume.html
-    - text: "Dashboard"
+    - text: "Problem 2"
       href: noaa_dashboard.html   
   right:
     - icon: fa-github
