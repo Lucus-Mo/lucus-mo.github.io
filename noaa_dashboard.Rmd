@@ -1,12 +1,13 @@
 ---
-title: "NOAA Flexdashboard — New York (1981–2010)"
+title: "Problem 2 — NOAA Flexdashboard (1981–2010)"
 output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
     theme: yeti
+    self_contained: false
+    lib_dir: "libs"
     source_code: embed
-    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -52,15 +53,21 @@ df <- df_raw |>
 
 ```{r}
 set.seed(123)
-scatter_n <- 50000L
+
+scatter_target <- 10000L   
+box_target     <- 20000L   
 
 df_scatter <- df |>
   dplyr::filter(!is.na(tmax_c), !is.na(tmin_c))
 
-n_take <- min(scatter_n, nrow(df_scatter))
-
 scatter_df <- df_scatter |>
-  dplyr::slice_sample(n = n_take)
+  dplyr::slice_sample(n = min(scatter_target, nrow(df_scatter)))
+
+box_source <- df |>
+  dplyr::filter(!is.na(tmax_c))
+
+box_df <- box_source |>
+  dplyr::slice_sample(n = min(box_target, nrow(box_source)))
 
 monthly_df <- df |>
   dplyr::mutate(ym = lubridate::floor_date(date, "month")) |>
@@ -70,6 +77,10 @@ monthly_df <- df |>
     tmin_mean = mean(tmin_c, na.rm = TRUE),
     .groups = "drop"
   )
+
+annual_prcp <- df |>
+  dplyr::group_by(year) |>
+  dplyr::summarise(total_prcp_mm = sum(prcp_mm, na.rm = TRUE), .groups = "drop")
 ```
 
 
