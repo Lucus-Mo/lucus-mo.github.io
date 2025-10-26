@@ -15,7 +15,7 @@ navbar:
     - icon: fa-envelope
       href: mailto:km4071@cumc.columbia.edu
     - text: "LinkedIn"
-      href: www.linkedin.com/in/kaicheng-mo-4bb627228
+      href: https://www.linkedin.com/in/kaicheng-mo-4bb627228
 output:
   html_document:
     theme: yeti
