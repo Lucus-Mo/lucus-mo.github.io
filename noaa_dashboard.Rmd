@@ -8,6 +8,7 @@ output:
     self_contained: false
     lib_dir: "libs"
     source_code: embed
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -54,8 +55,8 @@ df <- df_raw |>
 ```{r}
 set.seed(123)
 
-scatter_target <- 2000L   
-box_target     <- 2000L   
+scatter_target <- 1000L   
+box_target     <- 1000L   
 
 df_scatter <- df |>
   dplyr::filter(!is.na(tmax_c), !is.na(tmin_c))
