@@ -27,7 +27,7 @@ MPH, Epidemiology (GPA 4.0) · Sep 2024 – Jun 2026
 *Certification*: Applied Biostatistics & Data Science (2025)
 
 **University College London (UCL) — London, UK**  
-BSc, Biochemistry (Upper Second‑Class Honors, 2.1) · Sep 2021 – Jun 2024  
+BSc, Biochemistry · Sep 2021 – Jun 2024  
 *Research*: Assessed Gaussian & worm‑like chain models for IDPs; explored computational approaches to improve conformational predictions
 
 ## Selected Projects (2025)
